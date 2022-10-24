@@ -6,7 +6,7 @@ import RepoInformationCard from "./RepoInformationCard";
 
 const axiosConfig = {
   headers: {
-    Authorization: "Bearer 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",
+    Authorization: "Bearer ",
   },
 };
 
@@ -28,6 +28,8 @@ const Header = () => {
         setQueryData(response.data.items);
       });
   };
+
+  console.log(queryData);
 
   return (
     <div>
@@ -55,16 +57,24 @@ const Header = () => {
           <p className="text-white ">by Abdul Mustapha</p>
         </div>
       </div>
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-2">
         {JSON.stringify(queryData) !== "{}" ? (
           <>
             {queryData.map((repo) => (
-              <RepoInformationCard />
+              <RepoInformationCard
+                key={repo.id}
+                full_name={repo.full_name}
+				description={repo.description}
+				stars={repo.stargazers_count}
+                forks={repo.forks_count}
+				watchers={repo.watchers_count}
+                issues={repo.open_issues}
+              />
             ))}
           </>
         ) : (
           <>
-            <p>No data!</p>
+            <p>No data :(</p>
           </>
         )}
       </div>
