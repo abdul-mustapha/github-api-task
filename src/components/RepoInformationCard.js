@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RepoInformationCard = () => {
+const RepoInformationCard = ({full_name, forks, issue,}) => {
   return (
 	<div>RepoInformationCard</div>
   )
