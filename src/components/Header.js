@@ -69,6 +69,8 @@ const Header = () => {
                 forks={repo.forks_count}
 				watchers={repo.watchers_count}
                 issues={repo.open_issues}
+				author={repo.owner.login}
+				url={repo.html_url}
               />
             ))}
           </>
