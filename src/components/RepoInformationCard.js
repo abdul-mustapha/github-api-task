@@ -1,5 +1,8 @@
 import React from "react";
-import { FaUser, FaLink } from "react-icons/fa";
+import { FaUser, FaLink, FaStar, FaEye } from "react-icons/fa";
+import { VscRepoForked, VscIssues } from "react-icons/vsc";
+
+const iconStyling = "flex items-center space-x-2";
 
 const RepoInformationCard = ({
   full_name,
@@ -16,12 +19,14 @@ const RepoInformationCard = ({
       <div className="bg-rose-100 m-3 p-5 flex space-x-3 justify-between h-40 items-center">
         <div className="overflow-hidden space-y-1">
           <p className="font-bold text-xl">{full_name}</p>
-          <p className="text-gray-600 text-md text-ellipsis">{description}</p>
-          <div className="flex items-center space-x-2 text-sm">
+          <p className="text-gray-700 text-md text-ellipsis truncate ">
+            {description}
+          </p>
+          <div className={`${iconStyling} text-sm`}>
             <FaUser />
             <p>{author}</p>
           </div>
-          <div className="flex items-center space-x-2 text-sm">
+          <div className={`${iconStyling} text-sm`}>
             <FaLink />
             <a href={url} target="_blank" rel="noreferrer">
               <p>Visit Repo</p>
@@ -29,14 +34,25 @@ const RepoInformationCard = ({
           </div>
         </div>
 
-        <div className="flex flex-col border-l-2 border-black pl-5 ">
-          <p>Stars: {stars}</p>
-          <p>Forks: {forks}</p>
-          <p>Watchers: {watchers}</p>
-          <p>Issues: {issues}</p>
+        <div className="border-l-2 border-black px-5 py-3 space-y-1">
+          <div className={iconStyling}>
+            <FaStar />
+            <p>{stars}</p>
+          </div>
+          <div className={iconStyling}>
+            <VscRepoForked />
+            <p>{forks}</p>
+          </div>
+          <div className={iconStyling}>
+            <FaEye />
+            <p>{watchers}</p>
+          </div>
+          <div className={iconStyling}>
+            <VscIssues />
+            <p>{issues}</p>
+          </div>
         </div>
       </div>
-      <div></div>
     </div>
   );
 };

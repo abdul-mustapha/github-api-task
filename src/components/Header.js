@@ -45,9 +45,9 @@ const Header = () => {
             placeholder="Search all of Github..."
             className="pr-2 pl-6 py-2 rounded-full w-72"
             onChange={(e) => setUserInput(e.target.value)}
-          ></input>
+          />
           <button
-            className="bg-white text-lg p-3 rounded-full"
+            className="bg-white text-lg p-3 rounded-full hover:bg-gray-200 hover:rotate-45 transition-all"
             onClick={(e) => handleSearch(e)}
           >
             <FiSearch />
@@ -57,7 +57,7 @@ const Header = () => {
           <p className="text-white ">by Abdul Mustapha</p>
         </div>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {JSON.stringify(queryData) !== "{}" ? (
           <>
             {queryData.map((repo) => (
