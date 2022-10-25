@@ -17,7 +17,7 @@ You may also see any lint errors in the console.
 # Instructions
 
 1. Copy and paste your Github Token into axiosConfig in Header.js
-2. Use the search bar and language filter to create a query press the search button!
+2. Use the search bar and language filter to build a query, then press the search button!
 
 # Project Thoughts
 
