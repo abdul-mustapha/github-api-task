@@ -6,7 +6,7 @@ import RepoInformationCard from "./RepoInformationCard";
 
 const axiosConfig = {
   headers: {
-    Authorization: "Bearer ",
+    Authorization: "Bearer  ",
   },
 };
 
@@ -84,6 +84,7 @@ const Header = () => {
                 issues={repo.open_issues}
                 author={repo.owner.login}
                 url={repo.html_url}
+                readmore={repo.created_at}
               />
             ))}
           </>
