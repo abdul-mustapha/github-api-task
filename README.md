@@ -1,26 +1,43 @@
-# Getting Started with my GitHub Repository Search Tool
+# GitHub Repository Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Search, filter, and explore GitHub repositories. Built with React 19, TypeScript, and Vite.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- React 19 + TypeScript
+- Vite
+- Mantine v8 (UI components)
+- TanStack Query (`useInfiniteQuery` for infinite scroll)
+- Lucide React (icons)
+- react-markdown (README rendering)
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cd 2026
+npm install
+npm run dev
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Opens at http://localhost:5173.
 
-# Instructions
+## GitHub token (optional)
 
-1. Copy and paste your Github Token into axiosConfig in Header.js
-2. Use the search bar and language filter to build a query, then press the search button!
+Add a `VITE_GITHUB_TOKEN` to your `.env` in `2026/` for higher rate limits.
 
-# Project Thoughts
+## What it does
 
-It was a good project to assess my skills when handling API information. I was attempting to use a new state management library called 'Zustand' so that I could break my data up into more components, however I spent too much time on that and decided to proceed with local state instead. I used TailwindCSS over styled components as tailwind is really fast and easy when playing with styling on the fly since I didn't have a UI design to follow. I could have added a "loading phase" to my project since the API requests take a while so would have been a good UX addition. One regret I had was not nesting my inputs together. This means that pressing enter on the keyboard on the search bar does not trigger the axios request. This is a relatively easy fix which would include wrapping my search bar and filters in a form rather than seperated out. I would have also added pagination so I could display more than 30 results.
+Type in the search bar and results show up live (debounced 500ms). You can filter by language and sort by stars, forks, or last updated. Results load more as you scroll down (infinite scroll). Click a card to open a modal with full repo details and the rendered README.
 
-I could not find the README.md information from the single API request. I was not sure on whether I was expected to call another endpoint, or scrapr the README page instead. If it was more clear, I would have most likely created a pop-up modal on the "Read More" section of the RepoInformationCard to display the text and images. I just passed the data as props as a placeholder.
+Dark/light mode toggle in the top right, defaults to your system preference.
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Original version
+
+The `2022/` folder has the original submission from 2022 (CRA, React 18, JavaScript, Tailwind v3).
