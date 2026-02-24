@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Container, SimpleGrid, Text, Stack, Loader, Center } from "@mantine/core";
 import { Search } from "lucide-react";
 import type { SearchParams, Repository } from "@/types";
@@ -20,25 +20,24 @@ export default function App() {
   const [searchParams, setSearchParams] = useState<SearchParams>(defaultParams);
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage } =
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGitHubSearch(searchParams);
 
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  useEffect(() => {
-    const el = bottomRef.current;
-    if (!el) return;
+  const bottomRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observerRef.current) observerRef.current.disconnect();
+      if (!node) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) fetchNextPage();
-      },
-      { threshold: 0 }
-    );
+      observerRef.current = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && hasNextPage) fetchNextPage();
+      });
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [fetchNextPage]);
+      observerRef.current.observe(node);
+    },
+    [fetchNextPage, hasNextPage]
+  );
 
   const allRepos = data?.pages.flatMap((page) => page.items) ?? [];
   const totalCount = data?.pages[0]?.total_count ?? 0;
@@ -87,7 +86,7 @@ interface SearchResultsProps {
   totalCount: number;
   query: string;
   onSelectRepo: (repo: Repository) => void;
-  bottomRef: React.RefObject<HTMLDivElement | null>;
+  bottomRef: (node: HTMLDivElement | null) => void;
   isFetchingNextPage: boolean;
 }
 
